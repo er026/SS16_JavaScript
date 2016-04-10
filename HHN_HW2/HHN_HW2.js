@@ -64,7 +64,7 @@ fs.readFile('Liste_PPN-ExNr_HSHN-libre.csv', 'utf8', function (err, inhalt) {
     //Barcode eindeutig?
     var duplicatesBarcode = [];
     
-    for (var i = 0; i< 5000; i++) { 
+    for (var i = 0; i< 1000; i++) { 
         var test = result[i].barcode;
         for (var j = 0; j< 5000; j++) { 
             if (i == j) continue;
@@ -81,7 +81,7 @@ fs.readFile('Liste_PPN-ExNr_HSHN-libre.csv', 'utf8', function (err, inhalt) {
     //Exemplar eindeutig?
     var duplicatesExemplar = [];
     
-    for (var i = 0; i< 5000; i++) { 
+    for (var i = 0; i< 1000; i++) { 
         var test = result[i].exemplar;
         for (var j = 0; j< 5000; j++) { 
             if (i == j) continue;
@@ -94,6 +94,21 @@ fs.readFile('Liste_PPN-ExNr_HSHN-libre.csv', 'utf8', function (err, inhalt) {
     end(JSON.stringify(duplicatesExemplar, null, 2));
     console.log("Es gibt " + duplicatesExemplar.length + " uneindeutige Exemplarnummern");
     
+    
+    //anzahl Exemplare pro Siegel
+    var HN = 0;
+    var KU = 0;
+    var SH = 0;
+    var C2 = 0;
+    for (var i = 0; i< result.length; i++) { 
+        var standEx = result[i].siegel;
+        if(standEx.replace(/\s/g, '') == "HN") {HN++;}
+        if(standEx.replace(/\s/g, '') == "KU") {KU++;}
+        if(standEx.replace(/\s/g, '') == "SH") {SH++;}
+        if(standEx.replace(/\s/g, '') == "C2") {C2++;}
+    }
+    console.log("HN: " + HN + " Exemplare   KU: " + KU + " Exemplare    SH: " + SH + " Exemplare     C2:" + C2 + " Exemplare");
+   
 });
 
 
