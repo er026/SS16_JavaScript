@@ -110,23 +110,40 @@ fs.readFile('Liste_PPN-ExNr_HSHN-libre.csv', 'utf8', function (err, inhalt) {
     console.log("HN: " + HN + " Exemplare   KU: " + KU + " Exemplare    SH: " + SH + " Exemplare     C2:" + C2 + " Exemplare");
    
     
-    //Wie viele verschiedene Signaturen
-    var allSig = [];
+//    //Wie viele verschiedene Signaturen
+//    var allSig = [];
+//    
+//    for (var i = 0; i< result.length; i++) { 
+//        var count = 0;
+//        var sig = result[i].signatur;
+//        for (var j = 0; j< 5000; j++) { 
+//            if (sig == allSig[j]) {
+//            count++;
+//            }
+//        }
+//        if(count<1){
+//            allSig.push(sig);
+//        }
+//    }
+//    console.log("Anzahl verschiedene Signaturen " + allSig.length);
+    
+    
+    //Wie viele verschiedene unique PPN
+    var allPPN = [];
     
     for (var i = 0; i< result.length; i++) { 
         var count = 0;
-        var sig = result[i].signatur;
+        var onePPN = result[i].ppn;
         for (var j = 0; j< 5000; j++) { 
-            if (sig == allSig[j]) {
+            if (onePPN == allPPN[j]) {
             count++;
             }
         }
         if(count<1){
-            allSig.push(sig);
+            allPPN.push(onePPN);
         }
     }
-    console.log(allSig.length);
-        
+    console.log("Anzahl Titel " + allPPN.length);
     
 });
 
